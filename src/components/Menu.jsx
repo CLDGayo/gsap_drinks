@@ -5,6 +5,7 @@ import { allCocktails } from '../../constants/index.js';
 import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 
 const Menu = () => {
@@ -19,6 +20,24 @@ const Menu = () => {
 
          gsap.fromTo(".details p", { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 100, ease: "power1.out" });
     },[currentIndex]);
+
+    useGSAP(() => {
+        const parallaxTimeline2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#menu",
+                start: "top 30%",
+                end: "bottom 80%",
+                scrub: true,
+            }
+        });
+        parallaxTimeline2
+        .from("#m-left-leaf", {
+            x: -100, y: -100
+        }, 0)
+        .from("#m-right-leaf", {
+            x: 100, y: 100
+        }, 0)
+    }, []);
 
     const totalCocktails = allCocktails.length;
 
@@ -39,8 +58,17 @@ const Menu = () => {
 
   return (
     <section id="menu" aria-labelledby="menu-heading">
-        <img src="/images/slider-left-leaf.png" alt="left-leaf" id="m-left-leaf" />
-        <img src="/images/slider-right-leaf.png" alt="right-leaf" id="m-right-leaf" />
+
+        <img 
+            src="/images/slider-left-leaf.png" 
+            alt="left-leaf" 
+            id="m-left-leaf" 
+        />
+        <img 
+            src="/images/slider-right-leaf.png" 
+            alt="right-leaf" 
+            id="m-right-leaf" 
+        />
 
         <h2 id="menu-heading" className='sr-only'>
             Cocktail Menu
