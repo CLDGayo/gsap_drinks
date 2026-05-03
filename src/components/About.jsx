@@ -23,7 +23,7 @@ const About = () => {
             .from(".top-grid div, .bottom-grid div", {
                 opacity: 0,
                 duration: 1,
-                ease: "poer1.out",
+                ease: "power1.out",
                 stagger: 0.04
             }, "-=0.5")
             })
